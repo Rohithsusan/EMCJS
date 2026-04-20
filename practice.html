@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white text-center p-6">
+    <h1 class="text-blue-800 text-3xl font-bold mb-6">STUDENT DETAILS TABLE</h1>
+    <h2 class="text-black-200 text-xl font-bold mb-6">STUDENT FORM</h2>
+
+    <div class="inline-block border-2 border-gray-400 p-2">
+        <table class="border border-gray-400">
+            <tr>
+                <td class="border px-3 py-2 font-semibold">Name</td>
+                <td class="border px-3 py-2">
+                    <input id="name" class="outline-none w-full" value="yosuva">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="border px-3 py-2 font-semibold">Age</td>
+                <td class="border px-3 py-2 ">
+                    <input id="age" type=number class="outline-none w-full" value="23">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="border px-3 py-2 font-semibold">Gender</td>
+                <td class="border px-3 py-2 text-left">
+                    <label class="mr-3 ">
+                        <input type="radio" name="gender" value="male" checked> Male
+                    </label>
+
+                    <label>
+                        <input type="radio" name="gender" value="Female"> Female
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td class=" border px-2 py-3 font-semibold">Course</td>
+                <td class="border px-3 py-2">
+                    <select id="course" class="w-full outline-none">
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td class=" border  py-3 font-semibold">Email</td>
+                <td class="border px-3 py-2">
+                    <input id="email" class="w-full outline-none" value="rohithususan@gmail">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="border p-2">
+                    <button onclick="addstudent()" class="w-full outline-none px-2 py-1 bg-green-500 text-xl">
+                        save
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <table class=" mt-6 mx-auto border-gray-400">
+        <thead>
+            <tr class="font-bold">
+                <td class="border px-4 py-3">Name</td>
+                <td class="border px-4 py-3">Age</td>
+                <td class="border px-4 py-3">Gender</td>
+                <td class="border px-4 py-3">course</td>
+                <td class="border px-4 py-3">mail</td>
+                <td class="border px-4 py-3">action</td>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr class="font-semi-bold">
+                <td class="border px-4 py-3">yosuva</td>
+                <td class="border px-4 py-3">23</td>
+                <td class="border px-4 py-3">Male</td>
+                <td class="border px-4 py-3">JavaScript</td>
+                <td class="border px-4 py-3">rohithususan@gmail</td>
+                <td class="border px-4 py-3 ">
+                    <button onclick="deleteRow(this)" class="bg-red-600 text-white px-3 py-1"> Delete </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function addstudent() {
+            let name = document.getElementById("name").value
+            let age = document.getElementById("age").value
+            let course = document.getElementById("course").value
+            let email = document.getElementById("email").value
+
+            let genderValue = "male"
+
+            if (document.querySelector('input[name=gender]:checked').value === "female") {
+                genderValue = "Female"
+            }
+
+            if (name === "") {
+                alert("please enter the name")
+                return
+            }
+
+            if (age === "") {
+                alert("please enter the age")
+                return
+            }
+
+            if (email === "") {
+                alert("please enter the email")
+                return
+            }
+
+            let newRow = document.createElement ("tr")
+
+            newRow.innerHTML = `
+    <td class="border px-4 py-2">${name}</td>
+    <td class="border px-4 py-2">${age}</td>
+    <td class="border px-4 py-2">${course}</td>
+    <td class="border px-4 py-2">${genderValue}</td>
+    <td class="border px-4 py-2">${email}</td>
+    <td class="border px-4 py-2">
+      <button onclick="deleteRow(this)" class="bg-red-600 text-white px-3 py-1">
+        Delete
+      </button>
+    </td>
+  `
+  document.getElementById("tableBody").appendChild(newRow);
+  
+  document.getElementById("name").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("email").value = "";
+  document.querySelector('input[name="gender"][value="Male"]').checked = true;
+  document.getElementById("course").value = "JavaScript";
+}
+
+function deleteRow(button) {
+  button.parentElement.parentElement.remove();
+}
+
+
+        
+    </script>
+
+</body>
+</html>

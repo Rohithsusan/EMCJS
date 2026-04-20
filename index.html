@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white text-center p-6">
+
+  <h1 class="text-blue-800 text-3xl font-bold mb-6">
+    STUDENT DETAILS TABLE
+  </h1>
+
+  <h2 class="text-xl font-bold mb-4">STUDENT FORM</h2>
+
+  <div class="inline-block border-2 border-gray-400 p-2">
+    <table class="border border-gray-400">
+      <tr>
+        <td class="border px-3 py-2 font-semibold">Name</td>
+        <td class="border px-3 py-2">
+          <input id="name" class="outline-none w-full" value="Yosuva">
+        </td>
+      </tr>
+
+      <tr>
+        <td class="border px-3 py-2 font-semibold">Age</td>
+        <td class="border px-3 py-2">
+          <input id="age" type="number" class="outline-none w-full" value="23">
+        </td>
+      </tr>
+
+      <tr>
+        <td class="border px-3 py-2 font-semibold">Gender</td>
+        <td class="border px-3 py-2 text-left">
+          <label class="mr-3">
+            <input type="radio" name="gender" value="Male" checked> Male
+          </label>
+          <label>
+            <input type="radio" name="gender" value="Female"> Female
+          </label>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="border px-3 py-2 font-semibold">Course</td>
+        <td class="border px-3 py-2">
+          <select id="course" class="w-full outline-none">
+            <option>JavaScript</option>
+            <option>Python</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="border px-3 py-2 font-semibold">E-mail</td>
+        <td class="border px-3 py-2">
+          <input id="email" type="email" class="outline-none w-full" value="yosuva@gmail.com">
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" class="border p-2">
+          <button onclick="addStudent()" class="w-full bg-green-500 text-black font-semibold py-1">
+            Save
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <table class="mt-6 mx-auto border border-gray-500">
+    <thead>
+      <tr class="font-bold">
+        <td class="border px-4 py-2">NAME</td>
+        <td class="border px-4 py-2">AGE</td>
+        <td class="border px-4 py-2">COURSE</td>
+        <td class="border px-4 py-2">GENDER</td>
+        <td class="border px-4 py-2">EMAIL</td>
+        <td class="border px-4 py-2">ACTION</td>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr>
+        <td class="border px-4 py-2">Amal</td>
+        <td class="border px-4 py-2">22</td>
+        <td class="border px-4 py-2">PYTHON</td>
+        <td class="border px-4 py-2">Male</td>
+        <td class="border px-4 py-2">Amal@gmail.com</td>
+        <td class="border px-4 py-2">
+          <button onclick="deleteRow(this)" class="bg-red-600 text-white px-3 py-1">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border px-4 py-2">Yosuva</td>
+        <td class="border px-4 py-2">23</td>
+        <td class="border px-4 py-2">JavaScript</td>
+        <td class="border px-4 py-2">Male</td>
+        <td class="border px-4 py-2">yosuva@gmail.com</td>
+        <td class="border px-4 py-2">
+          <button onclick="deleteRow(this)" class="bg-red-600 text-white px-3 py-1">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<script>
+function addStudent() {
+  let name = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
+  let course = document.getElementById("course").value;
+  let email = document.getElementById("email").value;
+  
+  let genderValue = "Male";
+  if (document.querySelector('input[name="gender"]:checked').value === "Female") {
+    genderValue = "Female";
+  }
+  
+  if (name === "") {
+    alert("Please enter name");
+    return;
+  }
+  
+  if (age === "") {
+    alert("Please enter age");
+    return;
+  }
+  
+  if (email === "") {
+    alert("Please enter email");
+    return;
+  }
+  
+  let newRow = document.createElement("tr");
+  
+  newRow.innerHTML = `
+    <td class="border px-4 py-2">${name}</td>
+    <td class="border px-4 py-2">${age}</td>
+    <td class="border px-4 py-2">${course}</td>
+    <td class="border px-4 py-2">${genderValue}</td>
+    <td class="border px-4 py-2">${email}</td>
+    <td class="border px-4 py-2">
+      <button onclick="deleteRow(this)" class="bg-red-600 text-white px-3 py-1">
+        Delete
+      </button>
+    </td>
+  `;
+  
+  document.getElementById("tableBody").appendChild(newRow);
+  
+  document.getElementById("name").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("email").value = "";
+  document.querySelector('input[name="gender"][value="Male"]').checked = true;
+  document.getElementById("course").value = "JavaScript";
+}
+
+function deleteRow(button) {
+  button.parentElement.parentElement.remove();
+}
+</script>
+
+</body>
+</html>
